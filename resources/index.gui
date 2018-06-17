@@ -1,0 +1,60 @@
+<svg class="background">
+
+  <!-- Weather and temperature -->
+  <text id="weatherConditions" x="50%" y="30%" class="weatherText"
+      text-anchor="middle" text-length="20">Loading...</text>
+  <text id="weatherTemperature" x="50%" y="40%" class="weatherText"
+      text-anchor="middle" text-length="20"></text>
+
+  <!-- health status -->  
+  <svg class="stats">
+    <use id="iconHRM" href="#heart-beat" />
+    <text id="txtHRM" class="stat-left" />
+    <use id="stats-cycle" href="#cycleview">
+      <use href="#cycleview-item" class="cycle-item">
+        <image href="images/steps.png" class="image" />
+        <text class="stat-right" />
+      </use>
+      <use href="#cycleview-item" class="cycle-item">
+        <image href="images/calories.png" class="image" />
+        <text class="stat-right" />
+      </use>
+      <use href="#cycleview-item" class="cycle-item">
+        <image href="images/distance.png" class="image" />
+        <text class="stat-right" />
+      </use>
+      <use href="#cycleview-item" class="cycle-item">
+        <image href="images/floors.png" class="image" />
+        <text class="stat-right" />
+      </use>
+      <use href="#cycleview-item" class="cycle-item">
+        <image href="images/active_minutes.png" class="image" />
+        <text class="stat-right" />
+      </use>
+    </use>
+  </svg> 
+ 
+  <!-- Day of Week and Date -->
+  <text id="dateStr" x="77%" y="53%" font-size="24" font-family="Tungsten-Medium" class="dateText"
+        text-anchor="middle" text-length="6">-</text>
+  
+  <!-- Clock hands mins, hours and seconds -->
+  <g id="mins" pointer-events="visible" transform="translate(50%,50%)">
+    <rect x="$-4" y="-110" width="8" height="110" class="minutehand" />
+    <circle cx="0" cy="-110" r="4" class="minutehand" />
+  </g>
+  
+  <g id="hours" pointer-events="visible" transform="translate(50%,50%)">
+    <rect x="-10" y="-85" width="6" height="50" class="hourhand" />
+    <rect x="1"   y="-85" width="6" height="50" class="hourhand" />
+    <arc x="-9" y="-90" width="16" height="16" arc-width="7" start-angle="270" sweep-angle="180" class="hourhand" />
+    <arc x="-10" y="-45" width="16" height="16" arc-width="7" start-angle="90" sweep-angle="180" class="hourhand" />
+    <rect x="-2"   y="-30" width="2" height="30" class="hourhand" />    
+  </g>
+  
+  <g id="secs" pointer-events="visible" transform="translate(50%,50%)">
+    <rect x="$-2" y="-120" width="2" height="120" class="secondhand" />
+  </g>
+  <circle cx="50%" cy="50%" r="6" class="secondhand" />
+      
+</svg>
