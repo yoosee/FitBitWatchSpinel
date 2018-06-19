@@ -33,6 +33,16 @@ const locationError = (error) => {
 }
 
 const fetchWeatherOpenweather = (lat, lon) => {
+  let current = fetchCurrentOpenWeather(lat, lon);
+  let forecast = fetchForecastOpenWeather(lat, lon);
+  const weather = {
+    current: current,
+    forecast: forecast,
+  };
+  return weather;
+};
+
+const fetchCurrentOpenweather = (lat, lon) => {
   const APIKEY = '40ed40883f0964911396ea2c04020029';
   const ENDPOINT = 'https://api.openweathermap.org/data/2.5/weather?units=metric';
   let url = ENDPOINT + '&lat=' + lat + '&lon=' + lon + '&appid=' + APIKEY;
