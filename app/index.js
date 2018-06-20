@@ -18,6 +18,7 @@ let dateStr = document.getElementById("dateStr");
 
 let weatherConditions = document.getElementById("weatherConditions");
 let weatherTemperature = document.getElementById("weatherTemperature");
+let weatherIcon = document.getElementById("weatherIcon");
 
 let txtHRM = document.getElementById("txtHRM");
 let iconHRM = document.getElementById("iconHRM");
@@ -45,10 +46,11 @@ const weatherCallback = (data) => {
   console.log("Weather in main: " + JSON.stringify(data));
   if(data.is_success === true) {
     const WEATHER_COND_MAX_LENGTH = 12;
-    weatherConditions.text  = util.truncateText(data.conditions, WEATHER_COND_MAX_LENGTH);
+    weatherConditions.text  = util.truncateText(data.current.conditions, WEATHER_COND_MAX_LENGTH);
     weatherTemperature.text = temperatureUnit === "C" ? 
-      Math.round(data.temperature) + "°C" :
-      Math.round(data.temperature * 9.0 / 5.0 + 32) + "°F";
+      Math.round(data.current.temperature) + "°C" :
+      Math.round(data.current.temperature * 9.0 / 5.0 + 32) + "°F";
+    weatherIcon.href = "weather/" + data.current.icon + ".png";
   }
 };
 myWeather.initialize(weatherCallback);

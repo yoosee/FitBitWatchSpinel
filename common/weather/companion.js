@@ -33,17 +33,18 @@ const locationError = (error) => {
 }
 
 const fetchWeatherOpenweather = (lat, lon) => {
-  let current = fetchCurrentOpenWeather(lat, lon);
-  let forecast = fetchForecastOpenWeather(lat, lon);
+  let current = fetchCurrentOpenweather(lat, lon);
+  let forecast = fetchForecastOpenweather(lat, lon);
   const weather = {
     current: current,
     forecast: forecast,
-  };
-  return weather;
+  };  
+  console.log("Weather in fetchWOW: " + JSON.stringify(weather));
+  returnWeatherData(weather);
 };
 
 const fetchCurrentOpenweather = (lat, lon) => {
-  const APIKEY = '40ed40883f0964911396ea2c04020029';
+  const APIKEY = 'c6c48ae1e6825a5819982b2390e9b577';
   const ENDPOINT = 'https://api.openweathermap.org/data/2.5/weather?units=metric';
   let url = ENDPOINT + '&lat=' + lat + '&lon=' + lon + '&appid=' + APIKEY;
   console.log('Calling OpenWeather.org weather API: ' + url);  
@@ -60,7 +61,8 @@ const fetchCurrentOpenweather = (lat, lon) => {
         icon: data["weather"][0]["icon"],
       }
       console.log("Weather: " + weather.conditions);
-      returnWeatherData(weather);
+//      returnWeatherData(weather);
+      return weather;
     });
   })
   .catch(function(err) {
@@ -69,7 +71,7 @@ const fetchCurrentOpenweather = (lat, lon) => {
 };  
 
 const fetchForecastOpenweather = (lat, lon) => {
-  const APIKEY = '40ed40883f0964911396ea2c04020029';
+  const APIKEY = 'c6c48ae1e6825a5819982b2390e9b577';
   const ENDPOINT = 'https://api.openweathermap.org/data/2.5/forecast?units=metric';
   let url = ENDPOINT + '&lat=' + lat + '&lon=' + lon + '&appid=' + APIKEY;
   console.log('Calling OpenWeather.org forecast API: ' + url);  
@@ -80,8 +82,8 @@ const fetchForecastOpenweather = (lat, lon) => {
     }    
     response.json()
     .then(function(data) {
-      const n = 0; // n consists digit from 0 to 39, n * 3 hour ahead forecast
-      const weather= {        
+      const n = 3; // n consists digit from 0 to 39, n * 3 hour ahead forecast
+      const forecast = {        
         temperature: data["list"][n]["main"]["temp"],
         temp_max: data["list"][n]["main"]["temp_max"],
         temp_min: data["list"][n]["main"]["temp_min"],
@@ -94,8 +96,9 @@ const fetchForecastOpenweather = (lat, lon) => {
         rain: data["list"][n]["rain"]["3h"], // rain volume for last 3 hours, mm, could be empty
         snow: data["list"][n]["rain"]["3h"], // snow volume for last 3 hours, mm, could be empty
       }
-      console.log("Weather: " + weather.conditions);
-      returnWeatherData(weather);
+      console.log("Forecast: " + forecast.conditions);
+//      returnWeatherData(weather);
+      return forecast;
     });
   })
   .catch(function(err) {
@@ -116,7 +119,7 @@ const fetchWeatherUnderground = (lat, lon) => {
         temperature: data["current_observation"]["temp_c"],
         conditions: data["current_observation"]["weather"]
       }
-      console.log("Weather: " + weather.conditions);
+//      console.log("Weather: " + weather.conditions);
       returnWeatherData(weather);
     });
   })

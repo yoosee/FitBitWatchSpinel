@@ -10,7 +10,7 @@ export default class Weather {
     let is_success  = undefined;
     
     this.onsuccess = undefined;
-    this.onerror   = undefinfo = {};
+    this.onerror   = undefined;
     
     if(this.onsuccess) this.onsuccess(evt.data); 
   }
@@ -34,9 +34,14 @@ update(data) {
     this.temperature = data.temperature ? data.temperature : "-";    
     this.conditions  = data.conditions ? data.conditions : "Loading...";          
     this.icon = data.icon ? data.icon : "unknown";          
-    for(key in data) {
-      this.info[key] = data[key];      
-    }          
+    let info = {};
+    for(let key in data) {
+      if(key !== undefined) {      
+//        console.log(`key: ${key} and value: ${data[key]}`);
+        info[key] = data[key];
+      }
+    }
+    this.info = info;
     this.updated_at  = new Date;
     this.is_success  = data.conditions ? true : false;
     }

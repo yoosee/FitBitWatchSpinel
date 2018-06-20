@@ -11,17 +11,22 @@
 }
 
 .healthText {
-  fill: fb-lavender;
+  fill: fb-white;
   font-size: 30;
-  font-family: Colfax-Medium;
+  font-family: Fabrikat-Bold;
   text-anchor: start;
   text-length: 20;
 }
 
 .weatherText {
-  fill: fb-lavender;
-  font-size: 32;
-  font-family: Colfax-Black;
+  fill: fb-white;
+  font-size: 20;
+  font-family: Fabrikat-Bold;
+/* font-family: Colfax-Black; */
+}
+
+.weatherIcon {
+  fill: white;
 }
 
 .dateText {
@@ -50,11 +55,11 @@
 }
 
 .stats text {
-  font-family: Colfax-Black;
+  font-family: Fabrikat-Bold;
 /*  font-family: SevilleSharp; */
   font-size: 30;
   text-length: 16;
-  fill: fb-lavender;
+  fill: fb-white;
 }
 
 #iconHRM {
