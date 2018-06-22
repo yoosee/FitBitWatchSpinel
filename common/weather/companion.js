@@ -5,8 +5,8 @@ import { geolocation } from "geolocation";
 // import Weather from '../common/weather/companion';
 // let weather = new Weather;
 
-export default class Weather {
-  constructor() {
+export default class Weather {  
+  constructor() {    
     messaging.peerSocket.addEventListener("message", (evt) => {
       if (evt.data !== undefined && evt.data.command == "weather") {
         getWeather();
@@ -33,14 +33,19 @@ const locationError = (error) => {
 }
 
 const fetchWeatherOpenweather = (lat, lon) => {
-  let current = fetchCurrentOpenweather(lat, lon);
-  let forecast = fetchForecastOpenweather(lat, lon);
-  const weather = {
-    current: current,
-    forecast: forecast,
-  };  
-  console.log("Weather in fetchWOW: " + JSON.stringify(weather));
-  returnWeatherData(weather);
+  let weather = {};
+  const promise = new Promise((resolve,reject) => {
+    let current = fetchCurrentOpenweather(lat, lon);
+    let forecast = fetchForecastOpenweather(lat, lon);
+    if(current !== undefined && forecast !== undefined) {
+      weather = {      
+        current: current,       
+        forecast: forecast        
+      };          
+      resolve(weather);
+    }
+  });
+  Promise.all(promise).then(returnWeatherData(weather));
 };
 
 const fetchCurrentOpenweather = (lat, lon) => {
@@ -55,14 +60,15 @@ const fetchCurrentOpenweather = (lat, lon) => {
     }    
     response.json()
     .then(function(data) {
-      const weather= {
+     let current = {
         temperature: data["main"]["temp"],
         conditions: data["weather"][0]["main"],
         icon: data["weather"][0]["icon"],
       }
-      console.log("Weather: " + weather.conditions);
-//      returnWeatherData(weather);
-      return weather;
+      console.log("Weather: " + current.conditions);
+      let w = { current: current };      
+      returnWeatherData(w);
+      return current;
     });
   })
   .catch(function(err) {
@@ -83,7 +89,7 @@ const fetchForecastOpenweather = (lat, lon) => {
     response.json()
     .then(function(data) {
       const n = 3; // n consists digit from 0 to 39, n * 3 hour ahead forecast
-      const forecast = {        
+      let forecast = {        
         temperature: data["list"][n]["main"]["temp"],
         temp_max: data["list"][n]["main"]["temp_max"],
         temp_min: data["list"][n]["main"]["temp_min"],
@@ -97,7 +103,8 @@ const fetchForecastOpenweather = (lat, lon) => {
         snow: data["list"][n]["rain"]["3h"], // snow volume for last 3 hours, mm, could be empty
       }
       console.log("Forecast: " + forecast.conditions);
-//      returnWeatherData(weather);
+      let w = { forecast: forecast };
+      returnWeatherData(w);
       return forecast;
     });
   })
@@ -130,6 +137,7 @@ const fetchWeatherUnderground = (lat, lon) => {
 
 const returnWeatherData = (data) => {
   if(messaging.peerSocket.readyState === messaging.peerSocket.OPEN) {
+    console.log("Sending weather to the device: " + JSON.stringify(data));
     // Send a command to the device
     messaging.peerSocket.send(data);
   } else {
