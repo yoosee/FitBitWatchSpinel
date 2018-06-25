@@ -16,9 +16,10 @@ let minHand = document.getElementById("mins");
 let secHand = document.getElementById("secs");
 let dateStr = document.getElementById("dateStr");
 
-let weatherConditions = document.getElementById("weatherConditions");
 let weatherTemperature = document.getElementById("weatherTemperature");
 let weatherIcon = document.getElementById("weatherIcon");
+let weatherForecastTemperature = document.getElementById("weatherForecastTemperature");
+let weatherForecastIcon = document.getElementById("weatherForecastIcon");
 
 let txtHRM = document.getElementById("txtHRM");
 let iconHRM = document.getElementById("iconHRM");
@@ -41,16 +42,19 @@ const clockCallback = (data) => {
 myClock.initialize(GRANULARITY, clockCallback);
 
 /* ------- WEATHER ---------- */
-const weatherCallback = (data) => {
+const weatherCallback = (data) => {      
+  const WEATHER_COND_MAX_LENGTH = 12;
   let temperatureUnit = units.temperature; // temperature unit came from FitBit App settings via user-settings.units
   console.log("Weather in main: " + JSON.stringify(data));
-  if(data.is_success === true) {
-    const WEATHER_COND_MAX_LENGTH = 12;
-    weatherConditions.text  = util.truncateText(data.current.conditions, WEATHER_COND_MAX_LENGTH);
-    weatherTemperature.text = temperatureUnit === "C" ? 
-      Math.round(data.current.temperature) + "°C" :
-      Math.round(data.current.temperature * 9.0 / 5.0 + 32) + "°F";
+  if(data.is_success === true && data.current) {
+    weatherTemperature.text = util.ctof(data.current.temperature, temperatureUnit) + (temperatureUnit === "C" ? "°C" : "°F");
     weatherIcon.href = "weather/" + data.current.icon + ".png";
+  }
+  if(data.is_success === true && data.forecast) {
+    //weatherForecastTemperature.text = util.ctof(data.forecast.temperature, temperatureUnit) + (temperatureUnit === "C" ? "°C" : "°F");
+    weatherForecastTemperature.text = util.ctof(data.forecast.temp_min, temperatureUnit) + " | " + 
+      util.ctof(data.forecast.temp_max, temperatureUnit) + (temperatureUnit === "C" ? "°C" : "°F");
+    weatherForecastIcon.href = "weather/" + data.forecast.icon + ".png";    
   }
 };
 myWeather.initialize(weatherCallback);

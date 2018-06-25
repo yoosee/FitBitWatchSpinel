@@ -3,16 +3,12 @@
   <!-- Weather and temperature -->
   <section x="50" y="15" width="80" height="120">
     <image href="weather/03n.png" id="weatherIcon" load="sync" width="64" height="64" class="weatherIcon"  />  
-    <text id="weatherConditions" class="weatherText" x="50%" y="90"
-        text-anchor="middle" text-length="20">Loading...</text>
-    <text id="weatherTemperature" class="weatherText" x="50%" y="75"
-        text-anchor="middle" text-length="20">20°C</text>  
+    <text id="weatherTemperature" class="weatherText" x="45%" y="78" text-anchor="middle" text-length="20">20°C</text>  
   </section>
     
   <section x="180" y="15" width="80" height="120">
-    <image href="weather/03d.png"  load="sync" width="64" height="64" x="8" y="0" class="weatherIcon"  />  
-    <text id="weatherForecastTemperature" class="weatherText" x="50%" y="75"
-        text-anchor="middle" text-length="10">-4°C | 30°C</text>  
+    <image href="weather/03d.png" id="weatherForecastIcon" load="sync" width="64" height="64" x="8" y="0" class="weatherIcon"  />  
+    <text id="weatherForecastTemperature" class="weatherText" x="50%" y="78" text-anchor="middle" text-length="20">-4°C | 30°C</text>  
   </section>
   
   <section x="145" y="40">

@@ -5,7 +5,11 @@ export default class Weather {
     let temperature = undefined;
     let conditions  = undefined;   
     let icon = undefined;   
-    let info = {};    
+    
+    let info = {};
+    let current = undefined;
+    let forecast = undefined;
+    
     let updated_at  = undefined;
     let is_success  = undefined;
     
@@ -28,25 +32,24 @@ export default class Weather {
   }
   
   // set weather information from 'data' received. 
-update(data) {    
-  if(data) {     
-    console.log(`temperature: ${data.temperature} and conditions: ${data.conditions}`)    
-    this.temperature = data.temperature ? data.temperature : "-";    
-    this.conditions  = data.conditions ? data.conditions : "Loading...";          
-    this.icon = data.icon ? data.icon : "unknown";          
-    let info = {};
-    for(let key in data) {
-      if(key !== undefined) {      
-//        console.log(`key: ${key} and value: ${data[key]}`);
-        info[key] = data[key];
-      }
-    }
-    this.info = info;
-    this.updated_at  = new Date;
-    this.is_success  = data.conditions ? true : false;
+
+  update(data) {      
+    if(data && data.current) {
+      this.current  = data.current;
+      console.log(`update current temperature: ${data.current.temperature} and conditions: ${data.current.conditions}`);
+      this.temperature = data.current.temperature ? data.current.temperature : "-";
+      this.conditions  = data.current.conditions ? data.current.conditions : "Loading...";
+      this.icon = data.current.icon ? data.current.icon : "unknown";
+      this.updated_at  = new Date;
+      this.is_success  = data.current.conditions ? true : false;    
+    }  
+    if(data && data.forecast) {
+      console.log(`update forecast temperature: ${data.forecast.temperature} and conditions: ${data.forecast.conditions}`);
+        this.forecast = data.forecast;        
+      this.updated_at  = new Date;        
+      this.is_success  = data.forecast.conditions ? true : false;
     }
   }
-    
 };
 
 //setInterval(fetch, 30*1000*60);

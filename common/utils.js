@@ -17,6 +17,15 @@ export function monoDigits(digits) {
   return ret;
 }
 
+// temperature unit (C to F or C to C)
+export const ctof = (c, unit) => {
+  if(unit === "F") {
+    return (c * 9.0 / 5.0 + 32).toFixed(1);
+  }
+  //return Math.round(c, 1);
+  return c.toFixed(1);
+};
+
 // Hex to string
 export function hex2a(hex) {
   var str = '';
