@@ -11,9 +11,7 @@ import * as myWeather from "components/weather"
 
 /* -------- UI Components --------- */
 
-let hourHand = document.getElementById("hours");
-let minHand = document.getElementById("mins");
-let secHand = document.getElementById("secs");
+let digitalClock = document.getElementById("digitalClock");
 let dateStr = document.getElementById("dateStr");
 
 let weatherTemperature = document.getElementById("weatherTemperature");
@@ -35,9 +33,7 @@ const GRANULARITY = "seconds";
 /* --------- CLOCK ---------- */
 const clockCallback = (data) => {
   dateStr.text = data.dateText;
-  hourHand.groupTransform.rotate.angle = data.hoursAngle;  
-  minHand.groupTransform.rotate.angle = data.minutesAngle;
-  secHand.groupTransform.rotate.angle = data.secondsAngle;
+  digitalClock.text = data.digitalClock;
 };
 myClock.initialize(GRANULARITY, clockCallback);
 

@@ -2,14 +2,6 @@
   viewport-fill: black;
 }
 
-.fl {
-  fill: fb-white;
-}
-
-.fs {
-  fill: gray;
-}
-
 .healthText {
   fill: fb-white;
   font-size: 30;
