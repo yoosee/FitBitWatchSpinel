@@ -13,3 +13,4 @@ This clockface has not been available through the FitBit Gallery.
 
 This project uses code from https://github.com/Fitbit/sdk-moment and modified.
 Status icons are available from https://github.com/Fitbit/sdk-design-assets and follows Design Assets Licence.
+Weather icons are from https://www.easyicon.net/language.en/iconsearch/iconset:Cumulus-Weather-icons/

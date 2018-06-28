@@ -55,7 +55,7 @@
   
   <!-- Clock hands mins, hours and seconds -->
   <section x="50%" y="0">
-    <text id="digitalClock" font-size="98" text-anchor="middle" font-family="Colfax-Black" fill="white" text-length="10">12:34</text>
+    <text id="digitalClock" font-size="98" text-anchor="middle" font-family="Colfax-Bold" fill="white" text-length="10">12:34</text>
   </section>
       
 </svg>
