@@ -89,10 +89,16 @@ const fetchForecastOpenweather = (lat, lon) => {
     response.json()
     .then(function(data) {
       const n = 3; // n consists digit from 0 to 39, n * 3 hour ahead forecast
+      let t_max = 100; // t_max and t_min shows max/min temperature in next 3*10 hours
+      let t_min = -100;
+      for(let i=0; i <= 10; i++) {        
+        t_max = data["list"][n]["main"]["temp_max"] > t_max ? data["list"][n]["main"]["temp_max"] > t_max : t_max;
+        t_min = data["list"][n]["main"]["temp_min"] < t_min ? data["list"][n]["main"]["temp_min"] < t_min : t_min;        
+      }
       let forecast = {        
         temperature: data["list"][n]["main"]["temp"],
-        temp_max: data["list"][n]["main"]["temp_max"],
-        temp_min: data["list"][n]["main"]["temp_min"],
+        temp_max: t_max, 
+        temp_min: t_min,
         humidity: data["list"][n]["main"]["humidity"],
         pressure: data["list"][n]["main"]["puressure"],
         conditions: data["list"][n]["weather"][0]["main"],
