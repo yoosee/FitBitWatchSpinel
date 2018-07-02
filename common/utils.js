@@ -20,10 +20,10 @@ export function monoDigits(digits) {
 // temperature unit (C to F or C to C)
 export const ctof = (c, unit) => {
   if(unit === "F") {
-    return (c * 9.0 / 5.0 + 32).toFixed(1);
+    return (c * 9.0 / 5.0 + 32);
   }
   //return Math.round(c, 1);
-  return c.toFixed(1);
+  return c;
 };
 
 // Hex to string
@@ -44,3 +44,14 @@ export const truncateText = (t, max) => {
     return t.substring(0,(max-2)) + ".."
   }
 }
+
+export const round = (number, precision) => {
+  var shift = function (number, precision, reverseShift) {
+    if (reverseShift) {
+      precision = -precision;
+    }  
+    var numArray = ("" + number).split("e");
+    return +(numArray[0] + "e" + (numArray[1] ? (+numArray[1] + precision) : precision));
+  };
+  return shift(Math.round(shift(number, precision, false)), precision, true);
+};

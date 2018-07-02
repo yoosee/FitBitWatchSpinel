@@ -88,12 +88,12 @@ const fetchForecastOpenweather = (lat, lon) => {
     }    
     response.json()
     .then(function(data) {
-      const n = 3; // n consists digit from 0 to 39, n * 3 hour ahead forecast
-      let t_max = 100; // t_max and t_min shows max/min temperature in next 3*10 hours
-      let t_min = -100;
-      for(let i=0; i <= 10; i++) {        
-        t_max = data["list"][n]["main"]["temp_max"] > t_max ? data["list"][n]["main"]["temp_max"] > t_max : t_max;
-        t_min = data["list"][n]["main"]["temp_min"] < t_min ? data["list"][n]["main"]["temp_min"] < t_min : t_min;        
+      const n = 2; // n consists digit from 0 to 39, n * 3 (+a where 0 is a bit ahead) hour ahead forecast
+      let t_max = undefined; // t_max and t_min shows max/min temperature in next 3*7 hours
+      let t_min = undefined;
+      for(let i=0; i <= 7; i++) {  // calculate next 3*7 hours max/min temperature
+        t_max = (!t_max || data["list"][i]["main"]["temp_max"] > t_max) ? data["list"][i]["main"]["temp_max"]  : t_max;
+        t_min = (!t_min || data["list"][i]["main"]["temp_min"] < t_min) ? data["list"][i]["main"]["temp_min"]  : t_min;        
       }
       let forecast = {        
         temperature: data["list"][n]["main"]["temp"],
@@ -105,8 +105,8 @@ const fetchForecastOpenweather = (lat, lon) => {
         icon: data["list"][n]["weather"][0]["icon"],
         windspeed: data["list"][n]["wind"]["speed"],
         winddeg: data["list"][n]["wind"]["deg"],
-        rain: data["list"][n]["rain"]["3h"], // rain volume for last 3 hours, mm, could be empty
-        snow: data["list"][n]["rain"]["3h"], // snow volume for last 3 hours, mm, could be empty
+        rain: (data["list"][n]["rain"] && data["list"][n]["rain"]["3h"] ? data["list"][n]["rain"]["3h"] : 0), // rain volume for last 3 hours, mm, could be empty
+        snow: (data["list"][n]["snow"] && data["list"][n]["snow"]["3h"] ? data["list"][n]["snow"]["3h"] : 0), // snow volume for last 3 hours, mm, could be empty
       }
       console.log("Forecast: " + forecast.conditions);
       let w = { forecast: forecast };

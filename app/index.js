@@ -43,13 +43,14 @@ const weatherCallback = (data) => {
   let temperatureUnit = units.temperature; // temperature unit came from FitBit App settings via user-settings.units
   console.log("Weather in main: " + JSON.stringify(data));
   if(data.is_success === true && data.current) {
-    weatherTemperature.text = util.ctof(data.current.temperature, temperatureUnit) + (temperatureUnit === "C" ? "°C" : "°F");
+    weatherTemperature.text = util.round(util.ctof(data.current.temperature, temperatureUnit), 0) + (temperatureUnit === "C" ? "°C" : "°F");
     weatherIcon.href = "weather/" + data.current.icon + ".png";
   }
   if(data.is_success === true && data.forecast) {
     //weatherForecastTemperature.text = util.ctof(data.forecast.temperature, temperatureUnit) + (temperatureUnit === "C" ? "°C" : "°F");
-    weatherForecastTemperature.text = util.ctof(data.forecast.temp_min, temperatureUnit) + " | " + 
-      util.ctof(data.forecast.temp_max, temperatureUnit) + (temperatureUnit === "C" ? "°C" : "°F");
+    weatherForecastTemperature.text = 
+      util.round(util.ctof(data.forecast.temp_min, temperatureUnit), 0) + " | " + 
+      util.round(util.ctof(data.forecast.temp_max, temperatureUnit), 0) + (temperatureUnit === "C" ? "°C" : "°F");
     weatherForecastIcon.href = "weather/" + data.forecast.icon + ".png";    
   }
 };
