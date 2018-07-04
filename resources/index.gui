@@ -50,8 +50,8 @@
   </svg> 
  
   <!-- Day of Week and Date -->
-  <text id="dateStr" x="50%" y="80%" font-size="24" font-family="Tungsten-Medium" class="dateText"
-        text-anchor="middle" text-length="6">-</text>
+  <text id="dateStr" x="50%" y="74%" font-size="24" font-family="Seville-Condensed" class="dateText"
+        text-anchor="middle" text-length="20">-</text>
   
   <!-- Clock hands mins, hours and seconds -->
   <section x="50%" y="0">

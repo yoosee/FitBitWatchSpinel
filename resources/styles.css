@@ -40,15 +40,14 @@
 
 .stats {
   x: 5%;
-  y: 35%+66;
-  width: 222;
+  y: 80%;
+  width: 260;
   height: 48;
-  text-anchor: middle;
+  text-anchor: left;
 }
 
 .stats text {
   font-family: Fabrikat-Bold;
-/*  font-family: SevilleSharp; */
   font-size: 30;
   text-length: 16;
   fill: fb-white;
@@ -57,14 +56,14 @@
 #iconHRM {
   width: 24;
   height: 24;
-  y: 50;
-  x: 46%;
+  x: 80%-28;
+  y: 0;
   fill: #FF214A;
 }
 
 #txtHRM {
-  y: 71;
-  x: 46%+31;
+  x: 80%;
+  y: 0;  
 }
 
 .stat-left {
@@ -84,7 +83,7 @@
 }
 
 #stats-cycle {
-  x: 17%;
+  x: 10%;
   y: 0;
   width: 68%;
   height: 100%;

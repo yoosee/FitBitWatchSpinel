@@ -23,7 +23,8 @@ function tickHandler(evt) {
   let mins = n.getMinutes();
   let secs = n.getSeconds();
 
-  let dateText = ["SUN","MON","TUE","WED","THU","FRI","SAT"][n.getDay()] + "  " + n.getDate();
+  let dateText = ["SUN","MON","TUE","WED","THU","FRI","SAT"][n.getDay()] + "  " + n.getDate() + "  " +   
+      ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"][n.getMonth()];
 
   clockCallback({dateText: dateText, 
                  digitalClock: digitalClock(hours, mins, secs),
